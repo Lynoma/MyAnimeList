@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="MVVMAnimeList.Views.TrelloPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVMAnimeList.Views" xmlns:models="clr-namespace:MVVMAnimeList.Models"
+             mc:Ignorable="d" 
+             Background="Transparent"
+             d:DesignHeight="450" d:DesignWidth="600">
+    <Border>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <local:TrelloList MinWidth="40"
+                                  DataContext="{Binding ToWatchViewModel}" 
+                                  ItemDropCommand="{Binding ItemReceivedCommand}"
+                                  IncomingItem="{Binding IncomingItem}"
+                                  ItemRemovedCommand="{Binding ItemRemovedCommand}"
+                                  RemovedItem="{Binding RemovedItem}"
+                                  DeleteItem="{Binding DeleteTrelloItemsCommand}"
+                                  RightClickedItem="{Binding RightClickedItem}"
+                                  AddTagItemCommand="{Binding AddTagItemCommand}"
+                                  RemoveTagItemCommand="{Binding RemoveTagItemCommand}"
+                                  ClickedTag="{Binding ClickedTag}"/>
+
+                <local:TrelloList Grid.Column="1" 
+                                  MinWidth="40"
+                                  DataContext="{Binding WatchingViewModel}" 
+                                  ItemDropCommand="{Binding ItemReceivedCommand}" 
+                                  IncomingItem="{Binding IncomingItem}"
+                                  ItemRemovedCommand="{Binding ItemRemovedCommand}"
+                                  RemovedItem="{Binding RemovedItem}"
+                                  DeleteItem="{Binding DeleteTrelloItemsCommand}"
+                                  RightClickedItem="{Binding RightClickedItem}"
+                                  AddTagItemCommand="{Binding AddTagItemCommand}"
+                                  RemoveTagItemCommand="{Binding RemoveTagItemCommand}"
+                                  ClickedTag="{Binding ClickedTag}"/>
+
+                <local:TrelloList Grid.Column="2" 
+                                  MinWidth="40"
+                                  DataContext="{Binding WatchedViewModel}" 
+                                  ItemDropCommand="{Binding ItemReceivedCommand}" 
+                                  IncomingItem="{Binding IncomingItem}"
+                                  ItemRemovedCommand="{Binding ItemRemovedCommand}"
+                                  RemovedItem="{Binding RemovedItem}"
+                                  DeleteItem="{Binding DeleteTrelloItemsCommand}"
+                                  RightClickedItem="{Binding RightClickedItem}"
+                                  AddTagItemCommand="{Binding AddTagItemCommand}"
+                                  RemoveTagItemCommand="{Binding RemoveTagItemCommand}"
+                                  ClickedTag="{Binding ClickedTag}"/>
+
+                <local:TrelloList Grid.Column="3"
+                                  MinWidth="40"
+                                  DataContext="{Binding StandByViewModel}" 
+                                  ItemDropCommand="{Binding ItemReceivedCommand}"
+                                  IncomingItem="{Binding IncomingItem}"
+                                  ItemRemovedCommand="{Binding ItemRemovedCommand}"
+                                  RemovedItem="{Binding RemovedItem}"
+                                  DeleteItem="{Binding DeleteTrelloItemsCommand}"
+                                  RightClickedItem="{Binding RightClickedItem}"
+                                  AddTagItemCommand="{Binding AddTagItemCommand}"
+                                  RemoveTagItemCommand="{Binding RemoveTagItemCommand}"
+                                  ClickedTag="{Binding ClickedTag}"/>
+
+                <local:TrelloList Grid.Column="4" 
+                                  MinWidth="40"
+                                  DataContext="{Binding GiveUpViewModel}" 
+                                  ItemDropCommand="{Binding ItemReceivedCommand}"
+                                  IncomingItem="{Binding IncomingItem}"
+                                  ItemRemovedCommand="{Binding ItemRemovedCommand}"
+                                  RemovedItem="{Binding RemovedItem}"
+                                  DeleteItem="{Binding DeleteTrelloItemsCommand}"
+                                  RightClickedItem="{Binding RightClickedItem}"
+                                  AddTagItemCommand="{Binding AddTagItemCommand}"
+                                  RemoveTagItemCommand="{Binding RemoveTagItemCommand}"
+                                  ClickedTag="{Binding ClickedTag}"/>
+            </Grid>
+        </ScrollViewer>
+    </Border>
+</UserControl>

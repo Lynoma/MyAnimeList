@@ -1,0 +1,89 @@
+﻿<Window x:Class="MVVMAnimeList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMAnimeList" xmlns:views="clr-namespace:MVVMAnimeList.Views" xmlns:viewmodels="clr-namespace:MVVMAnimeList.ViewModels" xmlns:converters="clr-namespace:MVVMAnimeList.Converters" xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Title="MainWindow" Height="650" Width="1200">
+    <Window.Resources>
+        <converters:IsSearchPageConverter x:Key="IsSearchPageConverter"/>
+        <converters:IsTrelloPageConverter x:Key="IsTrelloPageConverter"/>
+        <converters:IsTagPageConverter x:Key="IsTagPageConverter"/>
+    </Window.Resources>
+    <Border Background="White" CornerRadius="20" Padding="10">
+        <Grid>
+            <Grid.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:TrelloPageViewModel}">
+                    <views:TrelloPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:SearchPageViewModel}">
+                    <views:SearchPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:TagPageViewModel}">
+                    <views:TagPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:DetailsPageViewModel}">
+                    <views:DetailsPage/>
+                </DataTemplate>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical">
+                <RadioButton IsChecked="{Binding CurrentViewModel, Converter={StaticResource IsSearchPageConverter}, Mode=OneWay}" 
+                             Command="{Binding NavigateToSearch}"
+                             FontSize="20"
+                             Height="50"
+                             VerticalAlignment="Center"
+                             Style="{StaticResource RdoBtnNavigation}"
+                             Margin="0,50,0,0">
+                    <DockPanel LastChildFill="True" VerticalAlignment="Center">
+                        <fa:ImageAwesome Icon="WindowClose" Height="28" Width="28" Margin="0,2,5,0"/>
+                        <TextBlock Text="Recherche"/>
+                    </DockPanel>
+                   
+                </RadioButton>
+
+
+
+                <RadioButton IsChecked="{Binding CurrentViewModel, Converter={StaticResource IsTrelloPageConverter}, Mode=OneWay}" 
+                             Command="{Binding NavigateToTrello}"
+                             FontSize="20"
+                             Height="50"
+                             VerticalAlignment="Center"
+                             Style="{StaticResource RdoBtnNavigation}">
+
+                    <DockPanel LastChildFill="True" VerticalAlignment="Center">
+                        <TextBlock Text="Trello"/>
+                    </DockPanel>
+                </RadioButton>
+
+                <RadioButton IsChecked="{Binding CurrentViewModel, Converter={StaticResource IsTagPageConverter}, Mode=OneWay}" 
+                             Command="{Binding NavigateToTag}"
+                             FontSize="20"
+                             Height="50"
+                             VerticalAlignment="Center"
+                             Style="{StaticResource RdoBtnNavigation}">
+
+                    <DockPanel LastChildFill="True" VerticalAlignment="Center">
+                        <TextBlock Text="Tags"/>
+                    </DockPanel>
+                </RadioButton>
+
+            </StackPanel>
+            <ContentControl x:Name="Content" Content="{Binding CurrentViewModel}" Grid.Column="1" Background="Transparent"/>
+            <StackPanel Grid.Column="2">
+                <Button Style="{StaticResource BtnCloseStyle}" Grid.Column="2"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
