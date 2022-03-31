@@ -24,9 +24,9 @@ namespace MVVMAnimeList.ViewModels
         {
             get { return _searchInput; }
             set 
-            { 
+            {
                 _searchInput = value;
-                OnPropertyChanged(nameof(SearchInput));
+                OnPropertyChanged(nameof(_searchInput));
             }
         }
         private ObservableCollection<AnimeItem> _listSearchItems;

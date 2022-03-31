@@ -2,22 +2,61 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fa="http://schemas.fontawesome.io/icons/">
 
 
-    <Color x:Key="detailMark">Green</Color>
+    <Color x:Key="detailMark">White</Color>
+    <Color x:Key="border">#FF9C9696</Color>
     <SolidColorBrush x:Key="detailMarkBrush" Color="{StaticResource ResourceKey=detailMark}" />
+    <SolidColorBrush x:Key="borderBrush" Color="{StaticResource ResourceKey=border}" />
     <Style x:Key="SearchBarStyle" TargetType="{x:Type TextBox}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
                         <Border Background="{StaticResource detailMarkBrush}" 
-                                CornerRadius="50">
+                                CornerRadius="50" 
+                                BorderBrush="{StaticResource borderBrush}" 
+                                BorderThickness="1">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="1.5" 
+                                                  Color="LightGray" 
+                                                  Direction="-45" 
+                                                  RenderingBias="Quality" 
+                                                  ShadowDepth="1"/>
+                            </Border.Effect>
                             <Grid>
-                                <fa:ImageAwesome Icon="Search" Margin="0,0,100,0" Height="20" Width="20"/>
-                                <TextBox Margin="1" Text="{TemplateBinding Text}" BorderThickness="0" Background="Transparent"/>
+                                <fa:ImageAwesome Icon="Search" 
+                                                 Margin="0,0,850,0" 
+                                                 Height="30" 
+                                                 Width="30"
+                                                 Foreground="{StaticResource borderBrush}"/>
+                                <TextBox Focusable="False" 
+                                         x:Name="baseMessage"
+                                         Margin="100,0,0,0"
+                                         Foreground="#FF9C9696"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         TextAlignment="Left"/>
+                                
+                                <TextBox x:Name="txt" 
+                                         Margin="100,0,0,0" 
+                                         TextAlignment="Left"
+                                         VerticalContentAlignment="Center"
+                                         Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                         BorderThickness="0" 
+                                         Background="Transparent">
+
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Gesture="Return" Command="{Binding searchCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
                             </Grid>
                         </Border>
-
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=txt, Path=Text}" Value="">
+                            <Setter TargetName="baseMessage" Property="Text" Value="Chercher un animé"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

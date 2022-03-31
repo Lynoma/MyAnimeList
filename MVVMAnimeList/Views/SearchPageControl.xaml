@@ -12,12 +12,10 @@
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
-        <DockPanel FlowDirection="RightToLeft" LastChildFill="True">
-            <Button Content="Search" Command="{Binding searchCommand}"/>
+        <DockPanel FlowDirection="RightToLeft" LastChildFill="True" Margin="5">
             <TextBox FontSize="20" 
                      FlowDirection="LeftToRight" 
                      VerticalContentAlignment="Center" 
-                     Text="{Binding SearchInput, Mode=TwoWay}"
                      Style="{StaticResource SearchBarStyle}"/>
             
         </DockPanel>
